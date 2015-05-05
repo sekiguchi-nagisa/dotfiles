@@ -3,6 +3,7 @@ scriptencoding utf-8
 set encoding=utf-8
 
 set nocompatible               " be iMproved
+syntax on
 set tabstop=4
 set shiftwidth=4
 set expandtab
