@@ -72,7 +72,14 @@ augroup PrevimSettings
     autocmd!
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-let g:previm_open_cmd = 'open -a Firefox'
+
+
+let OSTYPE = system('uname')
+if OSTYPE == "Darwin\n"
+    let g:previm_open_cmd = 'open -a Safari'
+elseif OSTYPE == "Linux\n"
+    let g:previm_open_cmd = 'firefox'
+endif
 
 " :PrevimOpen       " open browser and preview markdown  
 
