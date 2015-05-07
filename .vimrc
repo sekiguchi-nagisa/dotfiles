@@ -57,7 +57,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdcommenter.git'
 NeoBundle 'vim-scripts/SearchComplete.git'
 NeoBundle 'Shougo/neocomplcache.git'
-NeoBundle 'kannokanno/previm'
+NeoBundle 'kannokanno/previm.git'
 
 call neobundle#end()
 
