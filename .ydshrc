@@ -1,0 +1,10 @@
+$PS1 = '\u@\h:\w> '
+
+ls() {
+    command ls ${[$OSTYPE == 'Linux' ? '--color=auto' : 
+                 $OSTYPE == 'Darwin' ? '-G' : '']} $@
+}
+
+grep() {
+    command grep --color=auto $@
+}
