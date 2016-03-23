@@ -1,0 +1,3 @@
+[submodule "ext/RictyDiminished"]
+	path = ext/RictyDiminished
+	url = git@github.com:yascentur/RictyDiminished.git
