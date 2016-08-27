@@ -8,3 +8,11 @@ ls() {
 grep() {
     command grep --color=auto $@
 }
+
+la() {
+    ls -la $@
+}
+
+ll() {
+    ls -ll $@
+}
