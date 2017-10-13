@@ -16,3 +16,5 @@ la() {
 ll() {
     ls -ll $@
 }
+
+$HISTSIZE = 500u
