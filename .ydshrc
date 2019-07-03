@@ -17,4 +17,5 @@ ll() {
     ls -ll $@
 }
 
-$HISTSIZE = 500u
+source history
+$HISTSIZE = 1024u
