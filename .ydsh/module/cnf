@@ -13,7 +13,7 @@ function _cnf($s : Int, $e : Any) {
     
     var cmd = $ss[1]
     which cnf 2>&1 > /dev/null || {
-        echo 2>&1 $cmd command not found
+        echo 2>&1 $cmd: command not found
         return;
     }
 
