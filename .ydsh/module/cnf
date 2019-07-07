@@ -1,0 +1,23 @@
+# for command-not-found handling
+
+source atexit
+
+function _cnf($s : Int, $e : Any) {
+    if !($e is SystemError) {
+        return;
+    }
+    var ex = $e as SystemError
+    var ss = $ex.message().split(": ")
+    if $ss.size() != 3 { return; }
+    if $ss[0] != 'execution error'|| $ss[2] != 'command not found' { return; }
+    
+    var cmd = $ss[1]
+    which cnf 2>&1 > /dev/null || {
+        echo 2>&1 $cmd command not found
+        return;
+    }
+
+    cnf $cmd   
+}
+
+$atexit($ON_ERR, $_cnf)

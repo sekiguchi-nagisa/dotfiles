@@ -19,3 +19,5 @@ ll() {
 
 source history
 $HISTSIZE = 1024u
+
+source cnf
