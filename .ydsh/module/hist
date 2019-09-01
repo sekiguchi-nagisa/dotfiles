@@ -1,0 +1,20 @@
+
+source history
+
+function _trim() {
+    for(var i = 0; $i < $HISTORY.size(); ) {
+        if $HISTORY[$i].empty() {
+            $HISTORY.remove($i)
+            continue
+        }
+        $i++
+    }
+}
+
+hist_trim() {
+    $_trim()
+    command -v fzf 2>&1 > /dev/null 
+
+    history | nl | fzf --with-nth 2.. | { read n v; }
+    history -d $reply["n"]
+}
