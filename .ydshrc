@@ -17,7 +17,7 @@ ll() {
     ls -ll $@
 }
 
-source history
+source edit
 $HISTFILESIZE = 1024
 $HISTSIZE = 1024
 

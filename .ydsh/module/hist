@@ -1,5 +1,5 @@
 
-source history
+source edit
 
 function _trim() {
     for(var i = 0; $i < $HISTORY.size(); ) {
