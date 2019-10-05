@@ -1,4 +1,3 @@
-$PS1 = '\u@\h:\w> '
 
 ls() {
     command ls ${[$OSTYPE == 'Linux' ? '--color=auto' : 
@@ -17,8 +16,11 @@ ll() {
     ls -ll $@
 }
 
-source history
+source edit
 $HISTFILESIZE = 1024
 $HISTSIZE = 1024
+
+$PS1 = '\u@\h:\w> '
+
 
 source cnf
