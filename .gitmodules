@@ -1,4 +1,0 @@
-[submodule "ext/Ricty"]
-	path = ext/Ricty
-    url = https://github.com/yascentur/Ricty.git
-    ignore = dirty
