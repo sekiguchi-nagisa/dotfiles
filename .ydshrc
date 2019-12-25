@@ -24,3 +24,11 @@ $PS1 = '\u@\h:\w> '
 
 
 source cnf
+
+function _prompt($s : String) : String {
+    return "$(powerline-go -error $? -shell bash -condensed -colorize-hostname)"
+}
+
+if (which powerline-go 2>&1 > /dev/null) {
+    $PROMPT_HOOK = $_prompt
+}
