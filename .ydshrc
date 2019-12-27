@@ -29,6 +29,6 @@ function _prompt($s : String) : String {
     return "$(powerline-go -error $? -shell bash -condensed -colorize-hostname)"
 }
 
-if (which powerline-go 2>&1 > /dev/null) {
+if (which powerline-go &>  /dev/null) {
     $PROMPT_HOOK = $_prompt
 }
