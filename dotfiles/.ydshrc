@@ -31,5 +31,5 @@ function _prompt($s : String) : String {
 
 if (which powerline-go &>  /dev/null) {
     $PROMPT_HOOK = $_prompt
-    set_env LC_CTYPE="en_US.UTF-8"
+    set_env LC_CTYPE="en_US.UTF-8" # for East Asian Ambiguous width character
 }
