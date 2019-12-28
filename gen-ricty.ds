@@ -1,0 +1,80 @@
+#!/usr/bin/env ydsh
+
+error() {
+    echo 1>&2 [error] $@
+    exit 1
+}
+
+check() {
+    command -v $1 &> /dev/null || error require $1
+}
+
+
+# check tools
+check fontforge
+check curl
+check unzip
+
+
+# get scripts
+let DIR = "build-ricty"
+test -e $DIR && error $DIR has already exists
+mkdir $DIR && cd $DIR
+
+let RICTY_GEN = "ricty_generator-4.1.1.sh"
+curl -OL http://yusa.lab.uec.ac.jp/~yusa/ricty/$RICTY_GEN
+
+git clone https://github.com/powerline/fontpatcher
+cd fontpatcher
+git checkout c3488091611757cb02014ed7ed2f11be0208da83
+
+patch -p1 <<< "--- a/scripts/powerline-fontpatcher
++++ b/scripts/powerline-fontpatcher
+@@ -79,6 +79,13 @@
+ 		if bbox[3] > target_bb[3]:
+ 			target_bb[3] = bbox[3]
+ 
++		# Ignore the above calculation and
++		# manually set the best values for Ricty
++		target_bb[0]=0
++		target_bb[1]=-525
++		target_bb[2]=1025
++		target_bb[3]=1650
++
+ 	# Find source and target size difference for scaling
+ 	x_ratio = (target_bb[2] - target_bb[0]) / (source_bb[2] - source_bb[0])
+ 	y_ratio = (target_bb[3] - target_bb[1]) / (source_bb[3] - source_bb[1])
+"
+cd ../
+
+# get fonts
+## Inconsolata
+let IR = "Inconsolata-Regular.ttf"
+let IB = "Inconsolata-Bold.ttf"
+
+curl -OL "https://github.com/google/fonts/raw/f0e90b27b6e567af9378952a37bc8cf29e2d88e9/ofl/inconsolata/$IR"
+curl -OL "https://github.com/google/fonts/raw/f0e90b27b6e567af9378952a37bc8cf29e2d88e9/ofl/inconsolata/$IB"
+
+## Migu1M
+let MIG_R = "migu-1m-regular.ttf"
+let MIG_B = "migu-1m-bold.ttf"
+let MIG_DIR = "migu-1m-20150712"
+
+curl -L "https://osdn.jp/frs/redir.php?m=gigenet&f=%2Fmix-mplus-ipa%2F63545%2Fmigu-1m-20150712.zip" > ./$MIG_DIR.zip
+unzip $MIG_DIR.zip
+cp ./$MIG_DIR/$MIG_R ./
+cp ./$MIG_DIR/$MIG_B ./
+
+# generate Ricty
+sh $RICTY_GEN $IR $IB $MIG_R $MIG_B
+
+# apply fontpatcher
+for $e in $(find . -name "Ricty*.ttf") {
+    echo apply powerline patch to $e
+    fontforge -lang=py -script ./fontpatcher/scripts/powerline-fontpatcher $e
+}
+
+echo Ricty font generation finished!!
+echo "To install Ricty:
+  > sudo cp $DIR/Ricty*.ttf /usr/share/fonts/truetype/
+  > sudo fc-cache -vf"
