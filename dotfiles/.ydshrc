@@ -24,6 +24,17 @@ $PS1 = '\u@\h:\w> '
 
 
 source cnf
+function _cnf($s : String, $a : [String]) {
+    command -v cnf &> /dev/null && cnf $s
+}
+$CNF_HOOK = $_cnf
+
+function _cd($s : String) {
+    cd $s
+}
+$ISDIR_HOOK = $_cd
+
+
 
 function _prompt($s : String) : String {
     return "$(powerline-go -error $? -shell bash -condensed -colorize-hostname)"
