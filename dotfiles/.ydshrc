@@ -30,7 +30,7 @@ function _cnf($s : String, $a : [String]) {
 $CNF_HOOK = $_cnf
 
 function _cd($s : String) {
-    cd $s
+    command cd $s
 }
 $ISDIR_HOOK = $_cd
 
