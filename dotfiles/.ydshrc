@@ -31,6 +31,7 @@ $CNF_HOOK = $_cnf
 
 function _cd($s : String) {
     command cd $s
+    la
 }
 $ISDIR_HOOK = $_cd
 
@@ -40,7 +41,7 @@ function _prompt($s : String) : String {
     return "$(powerline-go -error $? -shell bash -condensed -colorize-hostname)"
 }
 
-if (which powerline-go &>  /dev/null) {
+if (command -v powerline-go &>  /dev/null) {
     $PROMPT_HOOK = $_prompt
     set_env LC_CTYPE="en_US.UTF-8" # for East Asian Ambiguous width character
 }
