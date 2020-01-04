@@ -14,7 +14,7 @@ check() {
 check fontforge
 check curl
 check unzip
-
+check patch
 
 # get scripts
 let DIR = "build-ricty"
