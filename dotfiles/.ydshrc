@@ -25,9 +25,11 @@ $PS1 = '\u@\h:\w> '
 
 source cnf
 function _cnf($s : String, $a : [String]) {
-    command -v cnf &> /dev/null && cnf $s
+    cnf $s
 }
-$CNF_HOOK = $_cnf
+if (command -v cnf &> /dev/null) {
+    $CNF_HOOK = $_cnf
+}
 
 function _cd($s : String) {
     command cd $s
