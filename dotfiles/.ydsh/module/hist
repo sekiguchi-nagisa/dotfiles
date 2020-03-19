@@ -16,7 +16,7 @@ hist_trim() {
     command -v fzf 2>&1 > /dev/null 
 
     var lines = new [Int]()
-    history | nl | sort -k 2 | fzf --multi --with-nth 2.. | while(read n v){ $lines.add($reply["n"].toInt32()!); }
+    history | nl | sort -k 2 | fzf --multi --with-nth 2.. | while(read n v){ $lines.add($reply["n"].toInt()!); }
     $lines.sort()
     for(var i = 0; $i < $lines.size(); $i++) {
         history -d ${$lines[$i] - $i}
