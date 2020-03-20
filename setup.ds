@@ -9,6 +9,6 @@ import-env HOME
 for $f in $(ls -a $DOT_DIR) {
     if $f == '.' || $f == '..' { continue; }
     echo link $DOT_DIR/$f to $HOME/$f
-    test -e $DOT_DIR/$f && { echo already exists; continue; }
+    test -e $HOME/$f && { echo already exists; continue; }
     ln -s $DOT_DIR/$f $HOME/$f 
 }
