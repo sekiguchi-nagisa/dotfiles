@@ -6,12 +6,20 @@ let DOT_DIR = "$SCRIPT_DIR/dotfiles"
 
 import-env HOME
 
-for $f in $(ls -a $DOT_DIR) {
-    if $f == '.' || $f == '..' { continue; }
-    if $f == 'bin' {
-        mkdir -p ~/bin
+function createLink($baseDir : String) {
+    for $f in $(ls -a $DOT_DIR/$baseDir) {
+        if $f == '.' || $f == '..' { continue; }
+        if $f == 'bin' { continue; }
+
+        var src = "$DOT_DIR/$baseDir/$f"
+        var dest = "$HOME/$baseDir/$f"
+        echo link $src to $dest
+        test -e $dest && { echo already exists; continue; }
+        ln -s $src $dest
     }
-    echo link $DOT_DIR/$f to $HOME/$f
-    test -e $HOME/$f && { echo already exists; continue; }
-    ln -s $DOT_DIR/$f $HOME/$f 
 }
+
+$createLink('.')
+test -e $HOME/bin || mkdir -p ~/bin || exit $?
+
+$createLink('bin')
