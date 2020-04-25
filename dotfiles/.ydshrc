@@ -17,8 +17,6 @@ ll() {
 }
 
 source edit
-$HISTFILESIZE = 1024
-$HISTSIZE = 1024
 
 $PS1 = '\u@\h:\w> '
 
