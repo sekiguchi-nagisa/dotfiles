@@ -48,10 +48,7 @@ if (command -v powerline-go &>  /dev/null) {
 fd() {
     command -v fzf &> /dev/null || { return 1; }
     command -v find &> /dev/null || { return 1; }
-    var p = $1
-    if $p.empty() {
-        $p = "."
-    }
+    var p = $1 :- "."
 
     var dir = "$(find $p -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m -1)"
