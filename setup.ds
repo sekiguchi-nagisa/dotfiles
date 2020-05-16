@@ -8,8 +8,10 @@ import-env HOME
 
 function createLink($baseDir : String) {
     for $f in $(ls -a $DOT_DIR/$baseDir) {
-        if $f == '.' || $f == '..' { continue; }
-        if $f == 'bin' { continue; }
+        case $f {
+        '.' | '..' | 'bin' => { continue; }
+        else => {}
+        }
 
         var src = "$DOT_DIR/$baseDir/$f"
         var dest = "$HOME/$baseDir/$f"
