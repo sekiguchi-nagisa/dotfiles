@@ -38,7 +38,8 @@ $ISDIR_HOOK = $_cd
 
 
 function _prompt($s : String) : String {
-    return "$(powerline-go -error $? -shell bash -condensed -colorize-hostname)"
+    var ret = "$(powerline-go -error $? -shell bash -condensed -colorize-hostname)"
+    return $ret :- $PS1
 }
 
 if (command -v powerline-go &>  /dev/null) {
