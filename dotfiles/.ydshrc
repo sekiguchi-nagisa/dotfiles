@@ -55,3 +55,8 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m -1)"
     $dir.empty() || cd $dir
 }
+
+function _inter($s : Signal) {
+    throw new SystemError("${$s.message()}")
+}
+$SIG[%'int'] = $_inter
