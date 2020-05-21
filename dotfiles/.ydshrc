@@ -46,13 +46,18 @@ if (command -v powerline-go &>  /dev/null) {
     $PROMPT_HOOK = $_prompt
 }
 
+source path
+
 fd() {
     command -v fzf &> /dev/null || { return 1; }
     command -v find &> /dev/null || { return 1; }
     var p = $1 :- "."
 
     var dir = "$(find $p -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m -1)"
+                  -o  -print 2> /dev/null | fzf +m -1)"
+    if !(test -d $dir) {
+        $dir = $dirname($dir)
+    }
     $dir.empty() || cd $dir
 }
 
