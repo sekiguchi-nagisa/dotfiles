@@ -49,8 +49,8 @@ if (command -v powerline-go &>  /dev/null) {
 source path
 
 fd() {
-    command -v fzf &> /dev/null || { return 1; }
-    command -v find &> /dev/null || { return 1; }
+    command -v fzf &> /dev/null || return 1;
+    command -v find &> /dev/null || return 1;
     var p = $1 :- "."
 
     var dir = "$(find $p -path '*/\.*' -prune \
