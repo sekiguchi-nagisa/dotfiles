@@ -46,6 +46,8 @@ let NERDSpaceDelims = 1
 nmap // <Plug>NERDCommenterToggle
 vmap // <Plug>NERDCommenterToggle
 
+let g:netrw_dirhistmax = 0
+
 filetype off                   " required!
 
 if has('vim_starting')
