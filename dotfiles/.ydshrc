@@ -60,8 +60,3 @@ fd() {
     }
     $dir.empty() || cd $dir
 }
-
-function _inter($s : Signal) {
-    throw new SystemError("${$s.message()}")
-}
-$SIG[%'int'] = $_inter
