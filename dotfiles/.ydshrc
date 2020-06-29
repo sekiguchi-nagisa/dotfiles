@@ -60,3 +60,12 @@ fd() {
     }
     $dir.empty() || cd $dir
 }
+
+open() {
+    case $OSTYPE {
+    'Linux' => xdg-open $@
+    'Darwin' => command open $@
+    else => echo 1>&2 unsupported os: $OSTYPE && exit 1
+    }
+}
+
