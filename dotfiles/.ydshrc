@@ -48,13 +48,19 @@ if (command -v powerline-go &>  /dev/null) {
 
 source path
 
-fd() {
-    command -v fzf &> /dev/null || return 1;
-    command -v find &> /dev/null || return 1;
-    var p = $1 :- "."
+function _ff($path : String) : String {
+    command -v fzf &> /dev/null || return "";
+    command -v find &> /dev/null || return "";
+    var p = $path :- "."
 
     var dir = "$(find $p -path '*/\.*' -prune \
                   -o  -print 2> /dev/null | fzf +m -1)"
+    return $dir
+}
+
+
+fd() {
+    var dir = $_ff($1)
     if !(test -d $dir) {
         $dir = $dirname($dir)
     }
@@ -69,3 +75,7 @@ open() {
     }
 }
 
+fo() {
+    var dir = $_ff($1)
+    $dir.empty() || open $dir
+}
