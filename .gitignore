@@ -1,2 +1,3 @@
 build-*
 dotfiles/.vim/bundle/*
+.DS_Store
