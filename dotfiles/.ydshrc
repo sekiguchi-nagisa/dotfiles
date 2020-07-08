@@ -64,7 +64,7 @@ fd() {
     if !(test -d $dir) {
         $dir = $dirname($dir)
     }
-    $dir.empty() || cd $dir
+    $dir.empty() || cd $dir && ls
 }
 
 open() {
@@ -82,5 +82,5 @@ fo() {
         $dir = $dirname($dir)
     }
     $path.empty() || open $path
-    $dir.empty() || cd $dir
+    $dir.empty() || cd $dir && ls
 }
