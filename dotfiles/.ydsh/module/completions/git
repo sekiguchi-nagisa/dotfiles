@@ -8,6 +8,10 @@ var git_bash_comp_path = ""
 function _git($words : [String], $cursor : Int) : [String] {
     let _helper = "$SCRIPT_DIR/../../git-completion.ydsh.bash"
     var cmd = $words[0]
+
+    test -f $git_bash_comp_path || return new [String]()
+    $cmd != "git" && $cmd != "gitk" && return new [String]()
+
     var line = ""
     for $w in $words {
         if !$line.empty() { $line += " "; }
