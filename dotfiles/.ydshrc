@@ -86,6 +86,6 @@ fo() {
 }
 
 # for git-completion
-source completions/git
+source $DATA_DIR/completion/git
 
 $git_bash_comp_path = "/etc/bash_completion.d/git.sh"
