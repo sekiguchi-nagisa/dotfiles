@@ -84,3 +84,8 @@ fo() {
     $path.empty() || open $path
     $dir.empty() || cd $dir && ls
 }
+
+# for git-completion
+source completions/git
+
+$git_bash_comp_path = "/etc/bash_completion.d/git.sh"
