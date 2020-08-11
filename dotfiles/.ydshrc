@@ -61,7 +61,7 @@ function _ff($path : String) : String {
 
 fd() {
     var dir = $_ff($1)
-    if !(test -d $dir) {
+    if !(test -d "$dir") {
         $dir = $dirname($dir)
     }
     $dir.empty() || cd $dir && ls
@@ -78,7 +78,7 @@ open() {
 fo() {
     var path = $_ff($1)
     var dir = $path
-    if !(test -d $dir) {
+    if !(test -d "$dir") {
         $dir = $dirname($dir)
     }
     $path.empty() || open $path
@@ -88,4 +88,3 @@ fo() {
 # for git-completion
 source $DATA_DIR/completion/*
 
-$git_bash_comp_path = "/etc/bash_completion.d/git.sh"
