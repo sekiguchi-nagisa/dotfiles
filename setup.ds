@@ -6,7 +6,8 @@ let DOT_DIR = "$SCRIPT_DIR/dotfiles"
 
 import-env HOME
 
-function createLink($baseDir : String) {
+createLink() {
+    let baseDir = "." :- $1
     for $f in $(ls -a $DOT_DIR/$baseDir) {
         case $f {
         '.' | '..' | 'bin' => { continue; }
@@ -21,7 +22,7 @@ function createLink($baseDir : String) {
     }
 }
 
-$createLink('.')
+createLink
 test -e $HOME/bin || mkdir -p ~/bin || exit $?
 
-$createLink('bin')
+createLink bin
