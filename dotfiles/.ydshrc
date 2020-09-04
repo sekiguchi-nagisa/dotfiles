@@ -16,6 +16,11 @@ ll() {
     ls -ll $@
 }
 
+proxy_off() {
+    unsetenv http_proxy
+    unsetenv https_proxy
+}
+
 source edit
 
 $PS1 = '\u@\h:\w> '
