@@ -76,7 +76,7 @@ open() {
     case $OSTYPE {
     'Linux' => xdg-open $@
     'Darwin' => command open $@
-    else => echo 1>&2 unsupported os: $OSTYPE && exit 1
+    else => echo 1>&2 unsupported os: $OSTYPE && return 1
     }
 }
 
@@ -90,6 +90,6 @@ fo() {
     $dir.empty() || cd $dir && ls
 }
 
-# for git-completion
+# for completion
 source $DATA_DIR/completion/*
 
