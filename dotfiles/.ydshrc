@@ -16,10 +16,6 @@ ll() {
     ls -ll $@
 }
 
-proxy_off() {
-    unsetenv http_proxy
-    unsetenv https_proxy
-}
 
 source edit
 
@@ -93,3 +89,5 @@ fo() {
 # for completion
 source $DATA_DIR/completion/*
 
+# for proxy
+source! ~/proxy_setting.ds
