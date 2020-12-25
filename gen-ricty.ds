@@ -21,8 +21,8 @@ let DIR = "build-ricty"
 test -e $DIR && error $DIR has already exists
 mkdir $DIR && cd $DIR
 
-let RICTY_GEN = "ricty_generator-4.1.1.sh"
-curl -OL http://yusa.lab.uec.ac.jp/~yusa/ricty/$RICTY_GEN
+let RICTY_GEN = "ricty_generator.sh"
+curl -OL https://rictyfonts.github.io/files/$RICTY_GEN
 
 git clone https://github.com/iij/fontmerger.git
 
