@@ -11,6 +11,7 @@ set number
 
 set ambiwidth=double
 set whichwrap=b,s,[,],<,>
+set backspace=indent,eol,start
 set list
 set listchars=tab:>.,trail:^,eol:¬,extends:»,precedes:«,nbsp:%
 " search option
