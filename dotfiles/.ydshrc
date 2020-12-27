@@ -70,7 +70,7 @@ fd() {
 
 open() {
     case $OSTYPE {
-    'Linux' => (uname -r | grep 'Microsoft') ? (explorer.exe $(wslpath -aw $@)) : xdg-open $@
+    'Linux' => (uname -r | grep 'Microsoft' &> /dev/null) ? (explorer.exe $(wslpath -aw $@)) : xdg-open $@
     'Darwin' => command open $@
     else => echo 1>&2 unsupported os: $OSTYPE && return 1
     }
