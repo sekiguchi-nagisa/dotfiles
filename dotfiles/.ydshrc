@@ -68,11 +68,17 @@ fd() {
     $dir.empty() || cd $dir && ls
 }
 
-open() {
+function _open($c : String) {
     case $OSTYPE {
-    'Linux' => (uname -r | grep 'Microsoft' &> /dev/null) ? (explorer.exe "$(wslpath -aw $@)") : xdg-open $@
-    'Darwin' => command open $@
-    else => echo 1>&2 unsupported os: $OSTYPE && return 1
+    'Linux' => (uname -r | grep 'Microsoft' &> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : xdg-open $c
+    'Darwin' => command open $c
+    else => echo 1>&2 unsupported os: $OSTYPE
+    }
+}
+
+open() {
+    for $e in $@ {
+        $_open($e)
     }
 }
 
