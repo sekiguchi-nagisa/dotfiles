@@ -52,7 +52,7 @@ sh $RICTY_GEN $IR $IB $MIG_R $MIG_B
 cp fontmerger/sample/* ./
 
 # adjust Ricty
-for $e in $(find . -name "Ricty*.ttf") {
+for $e in @(Ricty*.ttf) {
     echo adjust: $e
     fontforge -lang=ff -c 'Open($1);Select(0u0060);SetGlyphClass("base");Generate($1)' $e
 }
