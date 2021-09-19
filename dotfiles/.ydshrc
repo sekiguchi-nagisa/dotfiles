@@ -47,7 +47,7 @@ if (command -v powerline-go &>  /dev/null) {
     $PROMPT_HOOK = $_prompt
 }
 
-source path
+source path inlined
 
 function _ff($path : String) : String {
     command -v fzf &> /dev/null || return "";
@@ -96,4 +96,4 @@ fo() {
 source $DATA_DIR/completion/*
 
 # for proxy
-source! ~/proxy_setting.ds
+source! ~/proxy_setting.ds inlined
