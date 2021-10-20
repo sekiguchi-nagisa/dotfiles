@@ -30,10 +30,7 @@ if (command -v cnf &> /dev/null) {
     $CNF_HOOK = $_cnf
 }
 
-$ISDIR_HOOK = function($s : String) : Void => {
-    command cd $s
-    la
-}
+$ISDIR_HOOK = function($s : String) => command cd $s && la
 
 
 
