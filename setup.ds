@@ -4,25 +4,16 @@ git submodule update --init
 
 let DOT_DIR = "$SCRIPT_DIR/dotfiles"
 
-import-env HOME
+mkdir -p ~/.config|| exit $?
+ln -s $DOT_DIR/.config/ydsh ~/.config/
 
-createLink() {
-    let baseDir = "." :- $1
-    for $f in $(ls -a $DOT_DIR/$baseDir) {
-        case $f {
-        '.' | '..' | 'bin' => { continue; }
-        else => {}
-        }
+mkdir -p ~/.local/share/ydsh || exit $?
+ln -s $DOT_DIR/.local/share/ydsh/module ~/.local/share/ydsh/
 
-        var src = "$DOT_DIR/$baseDir/$f"
-        var dest = "$HOME/$baseDir/$f"
-        echo link $src to $dest
-        test -e $dest && { echo already exists; continue; }
-        ln -s $src $dest
-    }
+ln -s $DOT_DIR/.vimrc ~/
+ln -s $DOT_DIR/.vim ~/
+
+mkdir -p ~/bin || exit $?
+for $dir in @($DOT_DIR/bin/*) {
+    ln -s $dir ~/bin/
 }
-
-createLink
-test -e $HOME/bin || mkdir -p ~/bin || exit $?
-
-createLink bin
