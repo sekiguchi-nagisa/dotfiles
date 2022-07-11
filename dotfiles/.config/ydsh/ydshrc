@@ -88,6 +88,11 @@ fo() {
     $dir.empty() || cd $dir && ls
 }
 
+if (command -v dscolorize > /dev/null) {
+    $HIGHLIGHTER = function($s : String) => "$(dscolorize <<< $s)"
+}
+
+
 # for completion
 source $DATA_DIR/completion/*
 
