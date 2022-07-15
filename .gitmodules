@@ -2,5 +2,5 @@
 	path = dotfiles/.vim/bundle/neobundle.vim
 	url = https://github.com/Shougo/neobundle.vim
 [submodule "dotfiles/.local/share/ydsh/bcrun"]
-	path = dotfiles/.local/share/ydsh/bcrun
+	path = dotfiles/.local/share/ydsh/module/bcrun
 	url = https://github.com/sekiguchi-nagisa/bcrun.git
