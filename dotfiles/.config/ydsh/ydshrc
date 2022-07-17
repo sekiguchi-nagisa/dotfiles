@@ -94,6 +94,10 @@ if (command -v dscolorize > /dev/null) {
 
 
 # for completion
+source completion
+if $OSTYPE == "Darwin" {
+    $BASH_COMPLETION_PATH = "/opt/homebrew/etc/profile.d/bash_completion.sh"
+}
 source $DATA_DIR/completion/*
 
 # for proxy
