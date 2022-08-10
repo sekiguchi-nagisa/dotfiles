@@ -23,24 +23,17 @@ $PS1 = '\u@\h:\w> '
 
 
 source cnf
-function _cnf($s : String, $a : [String]) {
-    cnf $s
-}
 if (command -v cnf &> /dev/null) {
-    $CNF_HOOK = $_cnf
+    $CNF_HOOK = function($s : String, $a : [String]) => cnf $a
 }
 
 $ISDIR_HOOK = function($s : String) => command cd $s && la
 
-
-
-function _prompt($s : String) : String {
-    var ret = "$(powerline-go -error $? -shell bash -condensed -colorize-hostname -max-width 50)"
-    return $ret :- $PS1
-}
-
 if (command -v powerline-go &>  /dev/null) {
-    $PROMPT_HOOK = $_prompt
+    $PROMPT_HOOK = function($s : String) => {
+        var ret = "$(powerline-go -error $? -shell bash -condensed -colorize-hostname -max-width 50)"
+        $ret :- $PS1
+    }
 }
 
 source path inlined
@@ -101,4 +94,4 @@ if $OSTYPE == "Darwin" {
 source $DATA_DIR/completion/*
 
 # for proxy
-source! ~/proxy_setting.ds inlined
+source! ~/extra_setting.ds inlined
