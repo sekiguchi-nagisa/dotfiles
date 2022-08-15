@@ -24,7 +24,7 @@ $PS1 = '\u@\h:\w> '
 
 source cnf
 if (command -v cnf &> /dev/null) {
-    $CNF_HOOK = function($s : String, $a : [String]) => cnf $a
+    $CNF_HOOK = function($s : String, $a : [String]) => cnf $s
 }
 
 $ISDIR_HOOK = function($s : String) => command cd $s && la
