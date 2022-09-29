@@ -27,7 +27,7 @@ if (command -v cnf &> /dev/null) {
     $CNF_HOOK = function($s : String, $a : [String]) => cnf $s
 }
 
-$ISDIR_HOOK = function($s : String) => command cd $s && la
+$ISDIR_HOOK = function($s : String) => cd $s && pwd
 
 if (command -v powerline-go &>  /dev/null) {
     $PROMPT_HOOK = function($s : String) => {
