@@ -30,6 +30,7 @@ if (command -v cnf &> /dev/null) {
 $ISDIR_HOOK = function($s : String) => cd $s && pwd
 
 if (command -v powerline-go &>  /dev/null) {
+    hash powerline-go
     $PROMPT_HOOK = function($s : String) => {
         var ret = "$(powerline-go -error $? -shell bash -condensed -colorize-hostname -max-width 50)"
         $ret :- $PS1
@@ -82,6 +83,7 @@ fo() {
 }
 
 if (command -v dscolorize > /dev/null) {
+    hash dscolorize
     $HIGHLIGHTER = function($s : String) => "$(dscolorize <<< $s)"
 }
 
