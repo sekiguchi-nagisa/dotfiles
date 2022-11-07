@@ -1,7 +1,13 @@
 
+let _ls_opt : [String]
+case $OSTYPE {
+    'Linux' => { $_ls_opt.add('--color=auto'); }
+    'Darwin' => { $_ls_opt.add('-G'); }
+    else => {}
+}
+
 ls() {
-    command ls ${$OSTYPE == 'Linux' ? '--color=auto' : 
-                 $OSTYPE == 'Darwin' ? '-G' : ''} $@
+    command ls $_ls_opt $@
 }
 
 grep() {
