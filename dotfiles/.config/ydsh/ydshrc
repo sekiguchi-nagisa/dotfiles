@@ -88,12 +88,6 @@ fo() {
     $dir.empty() || cd $dir && ls
 }
 
-if (command -v dscolorize > /dev/null) {
-    hash dscolorize
-    $HIGHLIGHTER = function($s : String) => "$(dscolorize <<< $s)"
-}
-
-
 # for completion
 source completion
 if $OSTYPE == "Darwin" {
