@@ -29,13 +29,13 @@ $PS1 = '\u@\h:\w> '
 
 
 source cnf
-if (command -v cnf &> /dev/null) {
+if (command -v cnf &>> /dev/null) {
     $CNF_HOOK = function($s : String, $a : [String]) => cnf $s
 }
 
 $ISDIR_HOOK = function($s : String) => cd $s && pwd
 
-if (command -v powerline-go &>  /dev/null) {
+if (command -v powerline-go &>>  /dev/null) {
     hash powerline-go
     $PROMPT_HOOK = function($s : String) => {
         var ret = "$(powerline-go -error $? -shell bash -condensed -colorize-hostname -max-width 50)"
@@ -46,12 +46,12 @@ if (command -v powerline-go &>  /dev/null) {
 source path inlined
 
 function _ff($path : String) : String {
-    command -v fzf &> /dev/null || return "";
-    command -v find &> /dev/null || return "";
+    command -v fzf &>> /dev/null || return "";
+    command -v find &>> /dev/null || return "";
     var p = $path :- "."
 
     var dir = "$(find $p -path '*/\.*' -prune \
-                  -o  -print 2> /dev/null | fzf +m -1)"
+                  -o  -print 2>> /dev/null | fzf +m -1)"
     return $dir
 }
 
@@ -66,7 +66,7 @@ fd() {
 
 function _open($c : String) {
     case $OSTYPE {
-    'Linux' => (uname -r | grep '[Mm]icrosoft' &> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : xdg-open $c
+    'Linux' => (uname -r | grep '[Mm]icrosoft' &>> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : xdg-open $c
     'Darwin' => command open $c
     else => echo 1>&2 unsupported os: $OSTYPE
     }
