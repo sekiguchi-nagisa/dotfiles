@@ -22,8 +22,7 @@ ll() {
     ls -ll $@
 }
 
-
-source edit
+source repl inlined 
 
 $PS1 = '\u@\h:\w> '
 
@@ -32,8 +31,6 @@ source cnf
 if (command -v cnf &>> /dev/null) {
     $CNF_HOOK = function($s : String, $a : [String]) => cnf $s
 }
-
-$ISDIR_HOOK = function($s : String) => cd $s && pwd
 
 if (command -v powerline-go &>>  /dev/null) {
     hash powerline-go
@@ -87,13 +84,6 @@ fo() {
     $path.empty() || open $path
     $dir.empty() || cd $dir && ls
 }
-
-# for completion
-source completion
-if $OSTYPE == "Darwin" {
-    $BASH_COMPLETION_PATH = "/opt/homebrew/share/bash-completion/bash_completion"
-}
-source $DATA_DIR/completion/*
 
 # for proxy
 source! ~/extra_setting.ds inlined
