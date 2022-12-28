@@ -1,3 +1,4 @@
+source repl inlined
 
 let _ls_opt : [String]
 case $OSTYPE {
@@ -22,12 +23,6 @@ ll() {
     ls -ll $@
 }
 
-source repl inlined 
-
-$PS1 = '\u@\h:\w> '
-
-
-source cnf
 if (command -v cnf &>> /dev/null) {
     $CNF_HOOK = function($s : String, $a : [String]) => cnf $s
 }
@@ -40,7 +35,7 @@ if (command -v powerline-go &>>  /dev/null) {
     }
 }
 
-source path inlined
+source path
 
 function _ff($path : String) : String {
     command -v fzf &>> /dev/null || return "";
