@@ -35,27 +35,6 @@ if (command -v powerline-go &>>  /dev/null) {
     }
 }
 
-source path
-
-function _ff($path : String) : String {
-    command -v fzf &>> /dev/null || return "";
-    command -v find &>> /dev/null || return "";
-    var p = $path :- "."
-
-    var dir = "$(find $p -path '*/\.*' -prune \
-                  -o  -print 2>> /dev/null | fzf +m -1)"
-    return $dir
-}
-
-
-fd() {
-    var dir = $_ff($1)
-    if !(test -d "$dir") {
-        $dir = $dirname($dir)
-    }
-    $dir.empty() || cd $dir && ls
-}
-
 function _open($c : String) {
     case $OSTYPE {
     'Linux' => (uname -r | grep '[Mm]icrosoft' &>> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : xdg-open $c
@@ -70,14 +49,13 @@ open() {
     }
 }
 
-fo() {
-    var path = $_ff($1)
-    var dir = $path
-    if !(test -d "$dir") {
-        $dir = $dirname($dir)
-    }
-    $path.empty() || open $path
-    $dir.empty() || cd $dir && ls
+# for fzf options
+if (command -v bat &>> /dev/null) {
+    setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {}'"
+}
+
+if (command -v tree &>> /dev/null) {
+    setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 }
 
 # for proxy
