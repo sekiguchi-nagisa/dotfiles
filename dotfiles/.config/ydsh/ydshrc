@@ -51,7 +51,7 @@ open() {
 
 # for fzf options
 if (command -v bat &>> /dev/null) {
-    setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {}'"
+    setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {} --theme=Nord'"
 }
 
 if (command -v tree &>> /dev/null) {
