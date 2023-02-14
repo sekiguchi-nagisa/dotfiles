@@ -1,0 +1,35 @@
+#!/usr/bin/env ydsh
+
+error() {
+    echo 1>&2 [error] $@
+    exit 1
+}
+
+shctl set errraise
+
+let DIR = "fonts-download"
+test -e $DIR && error $DIR has already exists
+
+mkdir $DIR
+cd $DIR
+
+## get Cira (https://github.com/miiton/Cica)
+let CICA_DIR = "Cica"
+let CICA_V = "v5.0.3"
+echo downlaod $CICA_DIR
+curl -L "https://github.com/miiton/Cica/releases/download/$CICA_V/Cica_$CICA_V.zip" > ./$CICA_DIR.zip
+unzip $CICA_DIR.zip
+
+## get HackGen (https://github.com/yuru7/HackGen)
+let HACK_GEN_V = "v2.8.0"
+let HACK_GEN_NF_DIR = "HackGen_NF"
+echo downlaod $HACK_GEN_NF_DIR
+curl -L "https://github.com/yuru7/HackGen/releases/download/$HACK_GEN_V/HackGen_NF_$HACK_GEN_V.zip" > ./$HACK_GEN_NF_DIR.zip
+unzip $HACK_GEN_NF_DIR.zip
+
+cp  ${HACK_GEN_NF_DIR}_$HACK_GEN_V/HackGenConsole* ./
+
+echo "Fonts download succeed"
+echo "To install Fonts:
+  > sudo cp $DIR/*.ttf /usr/share/fonts/truetype/
+  > sudo fc-cache -vf"
