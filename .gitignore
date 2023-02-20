@@ -1,4 +1,4 @@
-
+build-*
 fonts-download
 dotfiles/.vim/bundle/*
 .DS_Store
