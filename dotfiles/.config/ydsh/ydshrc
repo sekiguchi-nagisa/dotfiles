@@ -59,4 +59,4 @@ if (command -v tree &>> /dev/null) {
 }
 
 # for proxy
-source! ~/extra_setting.ds inlined
+source? ~/extra_setting.ds inlined
