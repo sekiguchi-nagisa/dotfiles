@@ -2,7 +2,7 @@ source repl inlined
 
 let _ls_opt : [String]
 case $OSTYPE {
-    'Linux' => { $_ls_opt.add('--color=auto'); }
+    'Linux' | $/cygwin/i => { $_ls_opt.add('--color=auto'); }
     'Darwin' => { $_ls_opt.add('-G'); }
     else => {}
 }
@@ -39,6 +39,7 @@ function _open($c : String) {
     case $OSTYPE {
     'Linux' => (uname -r | grep '[Mm]icrosoft' &>> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : xdg-open $c
     'Darwin' => command open $c
+    $/cygwin/i => explorer.exe $c
     else => echo 1>&2 unsupported os: $OSTYPE
     }
 }
