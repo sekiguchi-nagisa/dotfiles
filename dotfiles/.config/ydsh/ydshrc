@@ -1,5 +1,8 @@
 source repl inlined
 
+$HISTFILESIZE = 4096
+$HISTSIZE = 4096
+
 let _ls_opt : [String]
 case $OSTYPE {
     'linux' | 'cygwin' => { $_ls_opt.add('--color=auto'); }
