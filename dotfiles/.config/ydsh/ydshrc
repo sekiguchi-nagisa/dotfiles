@@ -3,12 +3,12 @@ source repl inlined
 $HISTFILESIZE = 4096
 $HISTSIZE = 4096
 
-let _ls_opt : [String]
-case $OSTYPE {
-    'linux' | 'cygwin' => { $_ls_opt.add('--color=auto'); }
-    'darwin' => { $_ls_opt.add('-G'); }
-    else => {}
-}
+let _ls_opt =
+(case $OSTYPE {
+    'linux' | 'cygwin' => [ '--color=auto' ]
+    'darwin' => [ '-G' ]
+    else => new [String]()
+})
 
 ls() {
     command ls $_ls_opt $@
