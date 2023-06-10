@@ -5,7 +5,7 @@ $HISTSIZE = 4096
 
 let _ls_opt =
 (case $OSTYPE {
-    'linux' | 'cygwin' => [ '--color=auto' ]
+    'linux' | 'cygwin' | 'msys'=> [ '--color=auto' ]
     'darwin' => [ '-G' ]
     else => new [String]()
 })
@@ -42,7 +42,7 @@ function _open($c : String) {
     case $OSTYPE {
     'linux' => (uname -r | grep '[Mm]icrosoft' &>> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : xdg-open $c &!
     'darwin' => command open $c
-    'cygwin' => explorer.exe $c
+    'cygwin'|'msys' => explorer.exe $c
     else => echo 1>&2 unsupported os: $OSTYPE
     }
 }
