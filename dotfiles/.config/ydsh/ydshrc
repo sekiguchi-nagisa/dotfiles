@@ -54,13 +54,8 @@ open() {
 }
 
 # for fzf options
-if (command -v bat &>> /dev/null) {
-    setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {} --theme=Nord'"
-}
-
-if (command -v tree &>> /dev/null) {
-    setenv FZF_CD_OPTS="--preview 'tree -C {}'"
-}
+command -v bat &>> /dev/null && setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {} --theme=Nord'"
+command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 
 # for proxy
 source? ~/extra_setting.ds inlined
