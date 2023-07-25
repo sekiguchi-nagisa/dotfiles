@@ -8,7 +8,7 @@ mkdir -p ~/.config|| exit $?
 ln -s $DOT_DIR/.config/ydsh ~/.config/
 
 mkdir -p ~/.local/share/ydsh || exit $?
-ln -s $DOT_DIR/.local/share/ydsh/module ~/.local/share/ydsh/
+ln -s $DOT_DIR/.local/share/ydsh/modules ~/.local/share/ydsh/
 
 ln -s $DOT_DIR/.vimrc ~/
 ln -s $DOT_DIR/.vim ~/
