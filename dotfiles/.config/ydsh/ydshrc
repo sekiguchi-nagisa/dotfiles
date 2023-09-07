@@ -40,7 +40,7 @@ if (command -v powerline-go &>>  /dev/null) {
 
 function _open($c : String) {
     case $OSTYPE {
-    'linux' => (uname -r | grep '[Mm]icrosoft' &>> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : xdg-open $c &!
+    'linux' => (uname -r | grep '[Mm]icrosoft' &>> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : (xdg-open $c &!)
     'darwin' => command open $c
     'cygwin'|'msys' => explorer.exe $c
     else => echo 1>&2 unsupported os: $OSTYPE
