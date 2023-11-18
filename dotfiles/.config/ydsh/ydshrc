@@ -59,3 +59,15 @@ command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 
 # for proxy
 source? ~/extra_setting.ds inlined
+
+# shell-hook
+source? $MODULE_HOME/shtx
+command -V fake_source &>> /dev/null && fake_source /dev/stdin << 'EOF'
+## pyenv integration
+if [ -d "$HOME/.pyenv" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init - bash)"
+fi
+
+EOF
