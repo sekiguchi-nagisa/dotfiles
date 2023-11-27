@@ -71,3 +71,5 @@ if [ -d "$HOME/.pyenv" ]; then
 fi
 
 EOF
+
+true
