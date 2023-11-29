@@ -61,7 +61,7 @@ command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 source? ~/extra_setting.ds inlined
 
 # shell-hook
-source? $MODULE_HOME/shtx
+source? $MODULE_HOME/shtx inlined
 command -V fake_source &>> /dev/null && fake_source /dev/stdin << 'EOF'
 ## pyenv integration
 if [ -d "$HOME/.pyenv" ]; then
