@@ -1,14 +1,14 @@
-#!/usr/bin/env ydsh
+#!/usr/bin/env arsh
 
 git submodule update --init
 
 let DOT_DIR = "$SCRIPT_DIR/dotfiles"
 
 mkdir -p ~/.config|| exit $?
-ln -s $DOT_DIR/.config/ydsh ~/.config/
+ln -s $DOT_DIR/.config/arsh ~/.config/
 
 mkdir -p ~/.local/share/ydsh || exit $?
-ln -s $DOT_DIR/.local/share/ydsh/modules ~/.local/share/ydsh/
+ln -s $DOT_DIR/.local/share/arsh/modules ~/.local/share/arsh/
 
 ln -s $DOT_DIR/.vimrc ~/
 ln -s $DOT_DIR/.vim ~/
