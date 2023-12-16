@@ -7,7 +7,7 @@ let DOT_DIR = "$SCRIPT_DIR/dotfiles"
 mkdir -p ~/.config|| exit $?
 ln -s $DOT_DIR/.config/arsh ~/.config/
 
-mkdir -p ~/.local/share/ydsh || exit $?
+mkdir -p ~/.local/share/arsh || exit $?
 ln -s $DOT_DIR/.local/share/arsh/modules ~/.local/share/arsh/
 
 ln -s $DOT_DIR/.vimrc ~/
