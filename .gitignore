@@ -1,5 +1,5 @@
 build-*
 fonts-download
-dotfiles/.local/share/ydsh/modules/shtx*
+dotfiles/.local/share/arsh/modules/shtx*
 dotfiles/.vim/bundle/*
 .DS_Store
