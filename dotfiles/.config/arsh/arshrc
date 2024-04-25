@@ -68,6 +68,7 @@ if [ -d "$HOME/.pyenv" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init - bash)"
+  [ -d "$(pyenv root)/plugin/pyenv-virtualenv" ] && eval "$(pyenv virtualenv-init - bash)"
 fi
 
 EOF
