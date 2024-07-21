@@ -65,6 +65,11 @@ source? ~/extra_setting.ds inlined
 # shell-hook
 source? $MODULE_HOME/shtx inlined
 command -V fake_source &>> /dev/null && fake_source /dev/stdin << 'EOF'
+## command not found
+if command -v cnf &>> /dev/null; then
+  command_not_found_handle() { cnf "$1"; }
+fi
+
 ## mise integration
 if [ -e ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate bash)"
