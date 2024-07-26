@@ -55,6 +55,22 @@ open() {
     }
 }
 
+function _clipboard_copy(line: String, aa: [String]?): String? {
+    if (command -v pbcopy &>> /dev/null) {
+        printf "%s" $line | pbcopy
+    } elif (command -v xclip &>> /dev/null) {
+        printf "%s" $line | xclip -selection clipboard
+    } elif (command -v clip.exe &>> /dev/null) {
+        printf "%s" $line | clip.exe
+    }
+    return $none
+}
+
+# CTRL-S
+$LINE_EDIT.config('flow-control', $false)
+$LINE_EDIT.action('clipboard-copy', 'replace-whole', $_clipboard_copy)
+$LINE_EDIT.bind('^S', 'clipboard-copy')
+
 # for fzf options
 command -v bat &>> /dev/null && setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {} --theme=Nord'"
 command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
