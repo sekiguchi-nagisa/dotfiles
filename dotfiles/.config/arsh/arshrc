@@ -80,7 +80,8 @@ source? ~/extra_setting.ds inlined
 
 # shell-hook
 source? $MODULE_HOME/shtx inlined
-command -V fake_source &>> /dev/null && fake_source /dev/stdin << 'EOF'
+if (command -V fake_source &>> /dev/null) {
+    fake_source /dev/stdin << 'EOF'
 ## command not found
 if command -v cnf &>> /dev/null; then
   command_not_found_handle() { cnf "$1"; }
@@ -94,5 +95,8 @@ elif command -v mise &>> /dev/null; then
 fi
 
 EOF
+
+    command -v npm &>> /dev/null && fake_source <(npm completion)
+}
 
 true
