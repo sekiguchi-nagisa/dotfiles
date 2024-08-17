@@ -92,7 +92,11 @@ if [ -e ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate bash)"
 elif command -v mise &>> /dev/null; then
   eval "$(mise activate bash)"
+else
+  return
 fi
+
+_mise_hook  # force invoke hook
 
 EOF
 
