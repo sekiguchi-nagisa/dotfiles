@@ -36,7 +36,7 @@ if (command -v powerline-go &>>  /dev/null) {
         var ret = "$(powerline-go -error $? -shell bash -condensed -colorize-hostname -max-width 50
                                     -modules venv,user,host,ssh,cwd,perms,git,jobs,exit,root
                     )"
-        $ret :- $PS1
+        $ret.ifEmpty($PS1)!
     }
 }
 
