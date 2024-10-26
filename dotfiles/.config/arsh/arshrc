@@ -55,6 +55,14 @@ open() {
     }
 }
 
+code() {
+    if(checkenv WAYLAND_DISPLAY) {
+        command code --ozone-platform-hint=wayland --enable-wayland-ime -- $@
+    } else {
+        command code $@
+    }
+}
+
 function _clipboard_copy(line: String, aa: [String]?): String? {
     if (command -v pbcopy &>> /dev/null) {
         printf "%s" $line | pbcopy
