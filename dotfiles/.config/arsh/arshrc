@@ -26,8 +26,8 @@ ll() {
     ls -ll $@
 }
 
-if (command -v cnf &>> /dev/null) {
-    $CNF_HOOK = function($s : String, $a : [String]) => cnf $s
+if (command -v /usr/bin/cnf &>> /dev/null) {  # use absolute path due to broken PATH
+    $CNF_HOOK = function($s : String, $a : [String]) => /usr/bin/cnf $s
 }
 
 if (command -v powerline-go &>>  /dev/null) {
@@ -91,8 +91,8 @@ source? $MODULE_HOME/shtx inlined
 if (command -V fake_source &>> /dev/null) {
     fake_source /dev/stdin << 'EOF'
 ## command not found
-if command -v cnf &>> /dev/null; then
-  command_not_found_handle() { cnf "$1"; }
+if command -v /usr/bin/cnf &>> /dev/null; then
+  command_not_found_handle() { /usr/bin/cnf "$1"; }
 fi
 
 ## mise integration
