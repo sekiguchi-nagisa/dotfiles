@@ -108,7 +108,7 @@ _mise_hook  # force invoke hook
 
 EOF
 
-    command -v npm &>> /dev/null && fake_source <(npm completion)
+    command -v npm &>> /dev/null && fake_source /dev/stdin <<< "$(npm completion)"
 }
 
 true
