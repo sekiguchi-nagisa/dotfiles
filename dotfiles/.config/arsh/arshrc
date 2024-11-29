@@ -111,4 +111,10 @@ EOF
     command -v npm &>> /dev/null && fake_source <(npm completion)
 }
 
+# for ssh-agent
+if $OSTYPE == 'linux' && (checkenv XDG_RUNTIME_DIR) {
+    importenv XDG_RUNTIME_DIR
+    exportenv SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+}
+
 true
