@@ -66,6 +66,8 @@ code() {
 function _clipboard_copy(line: String, aa: [String]?): String? {
     if (command -v pbcopy &>> /dev/null) {
         printf "%s" $line | pbcopy
+    } elif (checkenv WAYLAND_DISPLAY && command -v wl-copy &>> /dev/null) {
+        printf "%s" $line | wl-copy &!
     } elif (command -v xclip &>> /dev/null) {
         printf "%s" $line | xclip -selection clipboard
     } elif (command -v clip.exe &>> /dev/null) {
