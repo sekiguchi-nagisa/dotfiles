@@ -66,6 +66,8 @@ code() {
 function _clipboard_copy(line: String, aa: [String]?): String? {
     if (command -v pbcopy &>> /dev/null) {
         printf "%s" $line | pbcopy
+    } elif (checkenv WAYLAND_DISPLAY && command -v wl-copy &>> /dev/null) {
+        printf "%s" $line | wl-copy &!
     } elif (command -v xclip &>> /dev/null) {
         printf "%s" $line | xclip -selection clipboard
     } elif (command -v clip.exe &>> /dev/null) {
@@ -112,6 +114,12 @@ _mise_hook  # force invoke hook
 EOF
 
     command -v npm &>> /dev/null && fake_source <(npm completion)
+}
+
+# for ssh-agent
+if $OSTYPE == 'linux' && (checkenv XDG_RUNTIME_DIR) {
+    importenv XDG_RUNTIME_DIR
+    exportenv SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 }
 
 true

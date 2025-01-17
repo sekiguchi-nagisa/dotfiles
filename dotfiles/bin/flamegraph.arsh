@@ -1,0 +1,21 @@
+#!/usr/bin/env arsh
+
+[<CLI(toplevel: $true)>]
+type _Param() {
+    [<Arg(required: $true, help: "FlameGraph script directory")>]
+    var flame_graph_dir = ""
+
+    [<Arg(required: $true, help: "output SVG path")>]
+    var output = ""
+}
+
+_main(p: _Param) {
+    test -d ${p.flame_graph_dir} || (echo must be directory: ${p.flame_graph_dir} && exit 1)
+    perf script |
+        call ${p.flame_graph_dir}/stackcollapse-perf.pl |
+        call ${p.flame_graph_dir}/flamegraph.pl > ${p.output}
+}
+
+# before call this script, must call `perf record --call-graph dwarf <cmd>`
+
+_main $@
