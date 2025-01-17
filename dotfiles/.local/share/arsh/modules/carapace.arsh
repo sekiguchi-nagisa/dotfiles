@@ -22,8 +22,12 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
     return $ret
 }
 
+let _carapace_ignores = ['git':$true]
+
 if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
     carapace --list | for line in $STDIN {
-        $compAdd($line.split(' ')[0], $_carapace_comp)
+        var cmd = $line.split(' ')[0]
+        $_carapace_ignores.get($cmd)  && continue
+        $compAdd($cmd, $_carapace_comp)
     }
 }
