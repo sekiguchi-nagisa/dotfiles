@@ -86,6 +86,9 @@ command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 # for proxy
 source? ~/extra_setting.ds inlined
 
+# for carapace backed completion
+source? $MODULE_HOME/carapace.arsh
+
 # shell-hook
 source? $MODULE_HOME/shtx inlined
 if (command -V fake_source &>> /dev/null) {

@@ -1,0 +1,29 @@
+source $MODULE_DIR/completion
+
+# $COMP_HOOK
+function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
+    var cmd = $argv[0]
+    var compline = $argv.join(' ')
+    if $n >= $argv.size() {
+        $compline += ' '
+    }
+
+    var ret : Candidates
+    (if (echo ${compline}"''" | xargs echo &>> /dev/null) {
+        echo ${compline}"''" | xargs carapace $cmd fish
+    } elif (echo ${compline} | sed "s/\$/'/" | xargs echo &>> /dev/null) {
+        echo ${compline} | sed "s/\$/'/" | xargs carapace $cmd fish
+    } else {
+        echo ${compline} | sed 's/$/"/' | xargs carapace $cmd fish
+    }) | for line in $STDIN {
+        var ss = $line.split($'\t')
+        $ret.add($ss[0], $ss.get(1))
+    }
+    return $ret
+}
+
+if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
+    carapace --list | for line in $STDIN {
+        $compAdd($line.split(' ')[0], $_carapace_comp)
+    }
+}
