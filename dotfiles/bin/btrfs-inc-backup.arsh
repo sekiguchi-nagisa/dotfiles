@@ -42,13 +42,16 @@ if $REPLY.lower() != "y" {
 #error failed!!
 
 # take snapshot
+echo @ take snapshot \`${SRC_PATH}\` to \`${SRC_BACKUP_NEW}\`
 btrfs subvolume snapshot -r $SRC_PATH $SRC_BACKUP_NEW || error "snapshot failed!!"
 sync
 
 # send/receive snapshot
+echo @ send snapshort to \`$DEST_PATH\`
 btrfs send -p $SRC_BACKUP $SRC_BACKUP_NEW | btrfs receive $DEST_PATH || error "send/receive failed!!"
 
 # remove old snapshot
+echo @ remove old snapshot
 btrfs subvolume delete $SRC_BACKUP || error "subvolume delete failed"
 mv $SRC_BACKUP_NEW $SRC_BACKUP || error "subvolume move failed"
 btrfs subvolume delete $DEST_BACKUP || error "subvolume delete failed"
