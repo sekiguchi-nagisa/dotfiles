@@ -1,7 +1,7 @@
 source repl inlined
 
-$HISTFILESIZE = 4096
-$HISTSIZE = 4096
+$HISTFILESIZE = 4096 * 4
+$HISTSIZE = 4096 * 4
 
 let _ls_opt =
 (case $OSTYPE {
