@@ -5,7 +5,7 @@ shctl set errraise
 cd $SCRIPT_DIR
 
 var log_dir=""
-log_dir=~/arshd-log
+log_dir=~/workspace/jupyter_playground_private/data/arshd-log
 
 test -d $log_dir || mkdir $log_dir
 
