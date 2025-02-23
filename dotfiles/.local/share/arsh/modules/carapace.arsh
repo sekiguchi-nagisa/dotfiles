@@ -28,6 +28,8 @@ if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
     carapace --list | for line in $STDIN {
         var cmd = $line.split(' ')[0]
         $_carapace_ignores.get($cmd)  && continue
-        $compAdd($cmd, $_carapace_comp)
+        if var old = $compAdd($cmd, $_carapace_comp) {  # do not overwrite already defined completer
+            $compAdd($cmd, $old)
+        }
     }
 }
