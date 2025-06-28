@@ -123,4 +123,17 @@ if $OSTYPE == 'linux' && (checkenv XDG_RUNTIME_DIR) {
     exportenv SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 }
 
+# explicitly enable token-aware actions
+{
+    var binding: [String:String]
+    for k,a in $LINE_EDIT.bindings() {
+        if $a.contains("word") {
+            $binding[$k] = $a.replace("word", "token")
+        }
+    }
+
+    for k, a in $binding {
+        $LINE_EDIT.bind($k, $a)
+    }
+}
 true
