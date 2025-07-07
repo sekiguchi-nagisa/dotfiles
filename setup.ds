@@ -6,6 +6,7 @@ let DOT_DIR = "$SCRIPT_DIR/dotfiles"
 
 mkdir -p ~/.config|| exit $?
 ln -s $DOT_DIR/.config/arsh ~/.config/
+ln -s $DOT_DIR/.config/kitty ~/.config/
 
 mkdir -p ~/.local/share/arsh || exit $?
 ln -s $DOT_DIR/.local/share/arsh/modules ~/.local/share/arsh/
