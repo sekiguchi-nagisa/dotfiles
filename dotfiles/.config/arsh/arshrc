@@ -123,4 +123,9 @@ if $OSTYPE == 'linux' && (checkenv XDG_RUNTIME_DIR) {
     exportenv SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 }
 
+# enable keyboard protocol in kitty, ghostty or iTerm2
+if (getenv 'TERM' && $REPLY =~ $/kitty|ghostty/) || (getenv TERM_PROGRAM && $REPLY.contains('iTerm')) {
+    $LINE_EDIT.config('keyboard-protocol', 'kitty')
+}
+
 true
