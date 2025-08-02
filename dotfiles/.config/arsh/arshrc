@@ -126,11 +126,13 @@ if $OSTYPE == 'linux' && (checkenv XDG_RUNTIME_DIR) {
 # enable keyboard protocol in kitty, ghostty or iTerm2
 if (getenv 'TERM' && $REPLY =~ $/kitty|ghostty/) || (getenv TERM_PROGRAM && $REPLY.contains('iTerm')) {
     $LINE_EDIT.config('keyboard-protocol', 'kitty')
+    $LINE_EDIT.config('semantic-prompt', $true)
 }
 
 # for window title
-$TITLE_HOOK = function() => {
-    $PWD == $OLDPWD && return $none
+$TITLE_HOOK = { var cache = ""; function() => {
+    $PWD == $cache && return $none
+    $cache = $PWD
     var p = $PWD.startsWith($HOME) ? $PWD.replace($HOME, '~', $true) : $PWD
     var ss = $p.split('/')
     for (var i = 0; $i < $ss.size() - 1; $i++) {
@@ -139,6 +141,6 @@ $TITLE_HOOK = function() => {
     }
     $p = $ss.join('/')
     return $p
-}
+}}
 
 true
