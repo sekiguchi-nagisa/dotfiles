@@ -128,4 +128,17 @@ if (getenv 'TERM' && $REPLY =~ $/kitty|ghostty/) || (getenv TERM_PROGRAM && $REP
     $LINE_EDIT.config('keyboard-protocol', 'kitty')
 }
 
+# for window title
+$TITLE_HOOK = function() => {
+    $PWD == $OLDPWD && return $none
+    var p = $PWD.startsWith($HOME) ? $PWD.replace($HOME, '~', $true) : $PWD
+    var ss = $p.split('/')
+    for (var i = 0; $i < $ss.size() - 1; $i++) {
+        $ss[$i].ifEmpty() ?? continue
+        $ss[$i] = $ss[$i][0]
+    }
+    $p = $ss.join('/')
+    return $p
+}
+
 true
