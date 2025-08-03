@@ -130,9 +130,7 @@ if (getenv 'TERM' && $REPLY =~ $/kitty|ghostty/) || (getenv TERM_PROGRAM && $REP
 }
 
 # for window title
-$TITLE_HOOK = { var cache = ""; function() => {
-    $PWD == $cache && return $none
-    $cache = $PWD
+$TITLE_HOOK = function() => {
     var p = $PWD.startsWith($HOME) ? $PWD.replace($HOME, '~', $true) : $PWD
     var ss = $p.split('/')
     for (var i = 0; $i < $ss.size() - 1; $i++) {
@@ -141,6 +139,6 @@ $TITLE_HOOK = { var cache = ""; function() => {
     }
     $p = $ss.join('/')
     return $p
-}}
+}
 
 true
