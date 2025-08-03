@@ -137,7 +137,7 @@ $TITLE_HOOK = { var cache = ""; function() => {
     var ss = $p.split('/')
     for (var i = 0; $i < $ss.size() - 1; $i++) {
         $ss[$i].ifEmpty() ?? continue
-        $ss[$i] = $ss[$i][0]
+        $ss[$i] = for ch in $ss[$i] { break $ch; }!
     }
     $p = $ss.join('/')
     return $p
