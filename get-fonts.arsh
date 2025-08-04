@@ -21,7 +21,7 @@ curl -L "https://github.com/miiton/Cica/releases/download/$CICA_V/Cica_$CICA_V.z
 unzip $CICA_DIR.zip
 
 ## get HackGen (https://github.com/yuru7/HackGen)
-let HACK_GEN_V = "v2.9.0"
+let HACK_GEN_V = "v2.10.0"
 let HACK_GEN_NF_DIR = "HackGen_NF"
 echo downlaod $HACK_GEN_NF_DIR
 curl -L "https://github.com/yuru7/HackGen/releases/download/$HACK_GEN_V/HackGen_NF_$HACK_GEN_V.zip" > ./$HACK_GEN_NF_DIR.zip
