@@ -64,6 +64,10 @@ code() {
     }
 }
 
+ssh() {
+    TERM=xterm-256color command ssh $@;  # workaround for kitty terminal
+}
+
 function _clipboard_copy(line: String, aa: [String]?): String? {
     if (command -v pbcopy &>> /dev/null) {
         printf "%s" $line | pbcopy
