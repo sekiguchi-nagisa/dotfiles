@@ -131,6 +131,8 @@ if $OSTYPE == 'linux' && (checkenv XDG_RUNTIME_DIR) {
 if (getenv 'TERM' && $REPLY =~ $/kitty|ghostty/) || (getenv TERM_PROGRAM && $REPLY.contains('iTerm')) {
     $LINE_EDIT.config('keyboard-protocol', 'kitty')
     $LINE_EDIT.config('semantic-prompt', $true)
+} elif getenv TERM_PROGRAM && $REPLY.contains('vscode') {
+    $LINE_EDIT.config('semantic-prompt', $true)
 }
 
 # for window title
