@@ -94,6 +94,7 @@ command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 source? ~/extra_setting.ds inlined
 
 # for carapace backed completion
+setenv CARAPACE_IGNORE='git:kill'
 source? $MODULE_HOME/carapace.arsh
 
 # shell-hook

@@ -22,12 +22,12 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
     return $ret
 }
 
-let _carapace_ignores = ['git':$true, 'kill': $true]
-
 if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
+    importenv CARAPACE_IGNORE : ""
+    let ignores = $CARAPACE_IGNORE.split(':').sort()
     carapace --list | for line in $STDIN {
         var cmd = $line.split(' ')[0]
-        $_carapace_ignores.get($cmd)  && continue
+        $ignores.searchSorted($cmd) > -1 && continue
         if var old = $compAdd($cmd, $_carapace_comp) {  # do not overwrite already defined completer
             $compAdd($cmd, $old)
         }
