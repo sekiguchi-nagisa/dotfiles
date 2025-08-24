@@ -22,7 +22,7 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
     return $ret
 }
 
-let _carapace_ignores = ['git':$true]
+let _carapace_ignores = ['git':$true, 'kill': $true]
 
 if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
     carapace --list | for line in $STDIN {
