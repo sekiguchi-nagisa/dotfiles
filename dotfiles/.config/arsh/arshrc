@@ -90,11 +90,11 @@ $LINE_EDIT.bind('^S', 'clipboard-copy')
 command -v bat &>> /dev/null && setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {} --theme=Nord'"
 command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 
-# for proxy
-source? ~/extra_setting.ds inlined
+# for env
+setenv CARAPACE_IGNORE='git:kill'
+setenv VISUAL=vim
 
 # for carapace backed completion
-setenv CARAPACE_IGNORE='git:kill'
 source? $MODULE_HOME/carapace.arsh
 
 # shell-hook
