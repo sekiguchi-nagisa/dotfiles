@@ -19,14 +19,6 @@ grep() {
     command grep --color=auto $@
 }
 
-la() {
-    ls -la $@
-}
-
-ll() {
-    ls -ll $@
-}
-
 if (command -v /usr/bin/cnf &>> /dev/null) {  # use absolute path due to broken PATH
     $CNF_HOOK = function($s : String, $a : [String]) => /usr/bin/cnf $s
 }
@@ -147,5 +139,9 @@ $TITLE_HOOK = function() => {
     $p = $ss.join('/')
     return $p
 }
+
+# abbreviation
+$LINE_EDIT.abbr('ll', 'ls -ll')
+$LINE_EDIT.abbr('la', 'ls -la')
 
 true
