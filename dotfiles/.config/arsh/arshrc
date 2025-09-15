@@ -86,6 +86,10 @@ command -v tree &>> /dev/null && setenv FZF_CD_OPTS="--preview 'tree -C {}'"
 setenv CARAPACE_IGNORE='git:kill'
 setenv VISUAL=vim
 
+# abbreviation
+abbr ll 'ls -ll'
+abbr la 'ls -la'
+
 # for carapace backed completion
 source? $MODULE_HOME/carapace.arsh
 
@@ -139,9 +143,5 @@ $TITLE_HOOK = function() => {
     $p = $ss.join('/')
     return $p
 }
-
-# abbreviation
-$LINE_EDIT.abbr('ll', 'ls -ll')
-$LINE_EDIT.abbr('la', 'ls -la')
 
 true
