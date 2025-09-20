@@ -17,7 +17,7 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
         echo ${compline} | sed 's/$/"/' | xargs carapace $cmd fish
     }) | for line in $STDIN {
         var ss = $line.split($'\t')
-        $ret.add($ss[0], $ss.get(1))
+        $ret.add($ss[0].quote(), $ss.get(1))
     }
     return $ret
 }
