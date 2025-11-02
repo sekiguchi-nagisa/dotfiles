@@ -1,4 +1,4 @@
-source repl inlined
+source $MODULE_DIR/repl inlined
 
 $HISTFILESIZE = 4096 * 4
 $HISTSIZE = 4096 * 4
@@ -59,6 +59,13 @@ code() {
 ssh() {
     TERM=xterm-256color command ssh $@;  # workaround for kitty terminal
 }
+
+# completion for user-defined commands
+source $MODULE_DIR/completion.arsh
+for cmd in ['ls', 'grep', 'code', 'ssh'] {
+    $compAlias($MODULE._fullname($cmd)!, $cmd)
+}
+
 
 function _clipboard_copy(line: String, aa: [String]?): String? {
     if (command -v pbcopy &>> /dev/null) {
