@@ -80,10 +80,10 @@ function _clipboard_copy(line: String, aa: [String]?): String? {
     return $none
 }
 
-# CTRL-S
+# ALT-S
 $LINE_EDIT.config('flow-control', $false)
 $LINE_EDIT.action('clipboard-copy', 'replace-whole', $_clipboard_copy)
-$LINE_EDIT.bind('^S', 'clipboard-copy')
+$LINE_EDIT.bind('^[s', 'clipboard-copy')
 
 # for fzf options
 command -v bat &>> /dev/null && setenv FZF_SELECT_FILES_OPTS="--preview 'bat -n -f {} --theme=Nord'"
