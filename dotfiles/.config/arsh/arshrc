@@ -2,7 +2,6 @@ source $MODULE_DIR/repl inlined
 
 $HISTFILESIZE = 4096 * 4
 $HISTSIZE = 4096 * 4
-history -r # reload
 
 let _ls_opt =
 (case $OSTYPE {
