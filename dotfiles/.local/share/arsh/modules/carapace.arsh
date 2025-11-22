@@ -7,6 +7,7 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
     if $n >= $argv.size() {
         $compline += ' '
     }
+    let tilde = $argv.peek().startsWith("~")
 
     var ret : Candidates
     (if (echo ${compline}"''" | xargs echo &>> /dev/null) {
@@ -17,9 +18,22 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
         echo ${compline} | sed 's/$/"/' | xargs carapace $cmd fish
     }) | for line in $STDIN {
         var ss = $line.split($'\t')
-        $ret.add($ss[0].quote(), $ss.get(1))
+        $ret.add($_quote($ss[0], $tilde), $ss.get(1))
     }
     return $ret
+}
+
+function _quote(can: String, tilde: Bool): String {
+    var trim_tilde = $false
+    if $tilde && $can.startsWith("~") {
+        $trim_tilde = $true
+        $can = $can.slice(1)
+    }
+    $can = $can.quote()
+    if $trim_tilde {
+        $can = "~" + $can
+    }
+    return $can
 }
 
 if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
