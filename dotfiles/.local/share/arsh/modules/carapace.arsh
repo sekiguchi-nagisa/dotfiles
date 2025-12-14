@@ -4,10 +4,16 @@ source $MODULE_DIR/completion
 function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
     var cmd = $argv[0]
     var compline = $argv.join(' ')
+    var wordToken = $argv.peek()
     if $n >= $argv.size() {
         $compline += ' '
+        $wordToken = ""
     }
-    let tilde = $argv.peek().startsWith("~")
+    if $wordToken.endsWith('\') && !$wordToken.dequote().endsWith('\') { # ex. --arg\
+        var arg = $wordToken.slice(0, -1)  # force remove trailing backslash (carapace do not remove trailing backslash)
+        $argv[-1] = $arg
+        $compline = $argv.join(' ')
+    }
 
     var ret : Candidates
     (if (echo ${compline}"''" | xargs echo &>> /dev/null) {
@@ -18,22 +24,10 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
         echo ${compline} | sed 's/$/"/' | xargs carapace $cmd fish
     }) | for line in $STDIN {
         var ss = $line.split($'\t')
-        $ret.add($_quote($ss[0], $tilde), $ss.get(1))
+        $ret.add($ss[0], $ss.get(1))
     }
+    $ret.quote($wordToken)
     return $ret
-}
-
-function _quote(can: String, tilde: Bool): String {
-    var trim_tilde = $false
-    if $tilde && $can.startsWith("~") {
-        $trim_tilde = $true
-        $can = $can.slice(1)
-    }
-    $can = $can.quote()
-    if $trim_tilde {
-        $can = "~" + $can
-    }
-    return $can
 }
 
 if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
