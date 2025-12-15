@@ -32,19 +32,21 @@ if (command -v powerline-go &>>  /dev/null) {
     }
 }
 
-function _open($c : String) {
+function _open($c : String): Bool {
     case $OSTYPE {
     'linux' => (uname -r | grep '[Mm]icrosoft' &>> /dev/null) ? (explorer.exe "$(wslpath -aw $c)") : (xdg-open $c &!)
     'darwin' => command open $c
     'cygwin'|'msys' => explorer.exe $c
-    else => echo 1>&2 unsupported os: $OSTYPE
+    else => { echo 1>&2 unsupported os: $OSTYPE; return $false; }
     }
+    return $true
 }
 
 open() {
     for $e in $@ {
-        $_open($e)
+        $_open($e) || return 1
     }
+    return 0
 }
 
 code() {
