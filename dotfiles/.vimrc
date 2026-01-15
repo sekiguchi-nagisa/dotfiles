@@ -39,8 +39,8 @@ map <C-p> :cp<CR>
 " <C-o> : back
 
 "enable clipboard share 
-set clipboard+=autoselect      " visual selection -> clipboard
-set clipboard+=unnamed         " yank -> clipboard
+" set clipboard+=autoselect      " visual selection -> clipboard
+" set clipboard+=unnamed         " yank -> clipboard
 
 "change NERDCommenter key bind
 let NERDSpaceDelims = 1
