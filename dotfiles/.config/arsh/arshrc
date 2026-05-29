@@ -49,21 +49,13 @@ open() {
     return 0
 }
 
-code() {
-    if(checkenv WAYLAND_DISPLAY) {
-        command code --ozone-platform-hint=wayland --enable-wayland-ime -- $@
-    } else {
-        command code $@
-    }
-}
-
 ssh() {
     TERM=xterm-256color command ssh $@;  # workaround for kitty terminal
 }
 
 # completion for user-defined commands
 source $MODULE_DIR/completion.arsh
-for cmd in ['ls', 'grep', 'code', 'ssh'] {
+for cmd in ['ls', 'grep', 'ssh'] {
     $compAlias($MODULE._fullname($cmd)!, $cmd)
 }
 
