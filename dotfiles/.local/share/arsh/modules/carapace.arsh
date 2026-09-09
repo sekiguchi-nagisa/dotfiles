@@ -3,26 +3,18 @@ source $MODULE_DIR/completion
 # $COMP_HOOK
 function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
     var cmd = $argv[0]
-    var compline = $argv.join(' ')
     var wordToken = $argv.peek()
     if $n >= $argv.size() {
-        $compline += ' '
+        $argv.add('')  # force add empty string to argv for carapace completion
         $wordToken = ""
     }
     if $wordToken.endsWith('\') && !$wordToken.dequote().endsWith('\') { # ex. --arg\
         var arg = $wordToken.slice(0, -1)  # force remove trailing backslash (carapace do not remove trailing backslash)
         $argv[-1] = $arg
-        $compline = $argv.join(' ')
     }
 
     var ret : Candidates
-    (if (echo ${compline}"''" | xargs echo &>> /dev/null) {
-        echo ${compline}"''" | xargs carapace $cmd fish
-    } elif (echo ${compline} | sed "s/\$/'/" | xargs echo &>> /dev/null) {
-        echo ${compline} | sed "s/\$/'/" | xargs carapace $cmd fish
-    } else {
-        echo ${compline} | sed 's/$/"/' | xargs carapace $cmd fish
-    }) | for line in $STDIN {
+    carapace $cmd fish $argv | for line in $STDIN {
         var ss = $line.split($'\t')
         $ret.add($ss[0], $ss.get(1))
     }
@@ -30,10 +22,17 @@ function _carapace_comp(m: Module, argv: [String], n: Int): Candidates? {
     return $ret
 }
 
-if (command -v carapace &>> /dev/null && command -v xargs &>> /dev/null) {
+if (command -v carapace &>> /dev/null) {
     importenv CARAPACE_IGNORE : ""
     let ignores = $CARAPACE_IGNORE.split(':').sort()
-    carapace --list | for line in $STDIN {
+    var opt = ["--list"]
+    let version = "$(carapace --version)".split(' ')[1]
+    let major = $version.split('.')[0].toInt() ?? 0
+    if $major > 0 {
+        $opt.add("--names")
+    }
+
+    carapace $opt | for line in $STDIN {
         var cmd = $line.split(' ')[0]
         $ignores.searchSorted($cmd) > -1 && continue
         if var old = $compAdd($cmd, $_carapace_comp) {  # do not overwrite already defined completer
