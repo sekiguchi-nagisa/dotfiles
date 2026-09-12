@@ -53,6 +53,28 @@ ssh() {
     TERM=xterm-256color command ssh $@;  # workaround for kitty terminal
 }
 
+[<CLI(verbose: $true, desc: "connect to remote desktop")>]
+type _RDPParam() {
+    [<Option(help: "hostname or ip address", required: $true)>]
+    var host = ""
+
+    [<Option(help: "username", required: $true)>]
+    var user = ""
+
+    [<Option(help: "scaling percentage (100 or 140, default: 140)", required: $false, choice: ["100","140"])>]
+    var scaling = '140'
+}
+
+rdp(param: _RDPParam) {
+    if (command -v xfreerdp &>> /dev/null) {
+        read -s -p "password: " || return 1
+        setsid -f < /dev/null xfreerdp /v:${param.host} /u:${param.user} /p:${REPLY} +clipboard /audio /size:1920x1080 /dynamic-resolution /scale:${param.scaling} /gfx &!
+    } else {
+        echo 1>&2 "no rdp client found"
+        return 1
+    }
+}
+
 # completion for user-defined commands
 source $MODULE_DIR/completion.arsh
 for cmd in ['ls', 'grep', 'ssh'] {
