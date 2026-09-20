@@ -138,6 +138,7 @@ _mise_hook  # force invoke hook
 EOF
 
     command -v npm &>> /dev/null && fake_source <(npm completion)
+    command -v mise &>> /dev/null && command -v usage &>> /dev/null && fake_source <(mise completion bash)
 }
 
 # for ssh-agent
